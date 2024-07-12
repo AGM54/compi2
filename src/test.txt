@@ -1,6 +1,5 @@
 x = 5
-y = 10
-z = x + y *
-a = (x + y
-b = 10 / 0
-c = x @ y
+y = 2
+while x < 10 do
+    x = x + y
+    y = y + 1
