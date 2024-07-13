@@ -1,6 +1,9 @@
-x = 5
-y = 10
-z = x + y *
-a = (x + y
-b = 10 / 0
-c = x @ y
+x = 10
+y = 20
+
+def addAndMultiply(a, b, c)
+    sum = a + b
+    result = sum * c
+    return result
+
+addAndMultiply(x, y, 2)
