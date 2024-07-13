@@ -109,6 +109,18 @@ public interface fungrammaListener extends ParseTreeListener {
 	 */
 	void exitParens(fungrammaParser.ParensContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code string}
+	 * labeled alternative in {@link fungrammaParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterString(fungrammaParser.StringContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code string}
+	 * labeled alternative in {@link fungrammaParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitString(fungrammaParser.StringContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code MulDiv}
 	 * labeled alternative in {@link fungrammaParser#expr}.
 	 * @param ctx the parse tree

@@ -124,6 +124,18 @@ public class fungrammaBaseListener implements fungrammaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterString(fungrammaParser.StringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitString(fungrammaParser.StringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterMulDiv(fungrammaParser.MulDivContext ctx) { }
 	/**
 	 * {@inheritDoc}

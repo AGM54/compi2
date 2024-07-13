@@ -1,9 +1,12 @@
 x = 10
 y = 20
+s = "Hello, "
+t = "world!"
 
-def addAndMultiply(a, b, c)
-    sum = a + b
-    result = sum * c
+
+
+def concatStrings(a, b)
+    result = a + b
     return result
 
-addAndMultiply(x, y, 2)
+concatStrings(s, t)

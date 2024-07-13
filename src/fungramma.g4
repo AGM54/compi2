@@ -15,6 +15,7 @@ exprList: expr (',' expr)* ;
 expr:   expr op=('*'|'/') expr       # MulDiv
     |   expr op=('+'|'-') expr       # AddSub
     |   INT                          # int
+    |   STRING                       # string
     |   ID                           # id
     |   '(' expr ')'                 # parens
     ;
@@ -25,6 +26,7 @@ ADD :   '+' ;
 SUB :   '-' ;
 ID  :   [a-zA-Z]+ ;
 INT :   [0-9]+ ;
+STRING :   '"' .*? '"' ;
 NEWLINE:'\r'? '\n' ;
 WS  :   [ \t]+ -> skip ;
 COMMENT :   '//' ~[\r\n]* -> skip ;

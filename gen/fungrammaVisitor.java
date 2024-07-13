@@ -70,6 +70,13 @@ public interface fungrammaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParens(fungrammaParser.ParensContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code string}
+	 * labeled alternative in {@link fungrammaParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitString(fungrammaParser.StringContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code MulDiv}
 	 * labeled alternative in {@link fungrammaParser#expr}.
 	 * @param ctx the parse tree
