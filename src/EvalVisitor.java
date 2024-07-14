@@ -2,11 +2,11 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EvalVisitor extends MiniLangBaseVisitor<Integer> {
+public class EvalVisitor extends gramaticaparenBaseVisitor<Integer> {
     private Map<String, Integer> memory = new HashMap<>();
 
     @Override
-    public Integer visitAssign(MiniLangParser.AssignContext ctx) {
+    public Integer visitAssign(gramaticaparenParser.AssignContext ctx) {
         String id = ctx.ID().getText();
         int value = visit(ctx.expr());
         memory.put(id, value);
@@ -15,10 +15,10 @@ public class EvalVisitor extends MiniLangBaseVisitor<Integer> {
     }
 
     @Override
-    public Integer visitMulDiv(MiniLangParser.MulDivContext ctx) {
+    public Integer visitMulDiv(gramaticaparenParser.MulDivContext ctx) {
         int left = visit(ctx.expr(0));
         int right = visit(ctx.expr(1));
-        if (ctx.op.getType() == MiniLangParser.MUL) {
+        if (ctx.op.getType() == gramaticaparenParser.MUL) {
             return left * right;
         } else {
             return left / right;
@@ -26,10 +26,10 @@ public class EvalVisitor extends MiniLangBaseVisitor<Integer> {
     }
 
     @Override
-    public Integer visitAddSub(MiniLangParser.AddSubContext ctx) {
+    public Integer visitAddSub(gramaticaparenParser.AddSubContext ctx) {
         int left = visit(ctx.expr(0));
         int right = visit(ctx.expr(1));
-        if (ctx.op.getType() == MiniLangParser.ADD) {
+        if (ctx.op.getType() == gramaticaparenParser.ADD) {
             return left + right;
         } else {
             return left - right;
@@ -37,12 +37,12 @@ public class EvalVisitor extends MiniLangBaseVisitor<Integer> {
     }
 
     @Override
-    public Integer visitInt(MiniLangParser.IntContext ctx) {
+    public Integer visitInt(gramaticaparenParser.IntContext ctx) {
         return Integer.valueOf(ctx.INT().getText());
     }
 
     @Override
-    public Integer visitId(MiniLangParser.IdContext ctx) {
+    public Integer visitId(gramaticaparenParser.IdContext ctx) {
         String id = ctx.ID().getText();
         if (memory.containsKey(id)) {
             return memory.get(id);
@@ -51,7 +51,7 @@ public class EvalVisitor extends MiniLangBaseVisitor<Integer> {
     }
 
     @Override
-    public Integer visitParens(MiniLangParser.ParensContext ctx) {
+    public Integer visitParens(gramaticaparenParser.ParensContext ctx) {
         return visit(ctx.expr());
     }
 }

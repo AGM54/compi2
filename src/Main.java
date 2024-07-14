@@ -7,7 +7,7 @@ public class Main {
         String inputFile = "src/test.txt";
         try {
             CharStream input = CharStreams.fromFileName(inputFile);
-            MiniLangLexer lexer = new MiniLangLexer(input);
+            gramaticaparenLexer lexer = new gramaticaparenLexer(input);
 
             // Manejo de errores en el lexer
             lexer.removeErrorListeners();
@@ -19,7 +19,7 @@ public class Main {
             });
 
             CommonTokenStream tokens = new CommonTokenStream(lexer);
-            MiniLangParser parser = new MiniLangParser(tokens);
+            gramaticaparenParser parser = new gramaticaparenParser(tokens);
 
             // Manejo de errores en el parser
             parser.removeErrorListeners();
