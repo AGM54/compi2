@@ -2,11 +2,11 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EvalVisitor extends MiniLangBaseVisitor<Integer> {
+public class EvalVisitor extends comparaBaseVisitor<Integer> {
     private Map<String, Integer> memory = new HashMap<>();
 
     @Override
-    public Integer visitAssign(MiniLangParser.AssignContext ctx) {
+    public Integer visitAssign(comparaParser.AssignContext ctx) {
         String id = ctx.ID().getText();
         int value = visit(ctx.expr());
         memory.put(id, value);
@@ -15,10 +15,10 @@ public class EvalVisitor extends MiniLangBaseVisitor<Integer> {
     }
 
     @Override
-    public Integer visitMulDiv(MiniLangParser.MulDivContext ctx) {
+    public Integer visitMulDiv(comparaParser.MulDivContext ctx) {
         int left = visit(ctx.expr(0));
         int right = visit(ctx.expr(1));
-        if (ctx.op.getType() == MiniLangParser.MUL) {
+        if (ctx.op.getType() == comparaParser.MUL) {
             return left * right;
         } else {
             return left / right;
@@ -26,10 +26,10 @@ public class EvalVisitor extends MiniLangBaseVisitor<Integer> {
     }
 
     @Override
-    public Integer visitAddSub(MiniLangParser.AddSubContext ctx) {
+    public Integer visitAddSub(comparaParser.AddSubContext ctx) {
         int left = visit(ctx.expr(0));
         int right = visit(ctx.expr(1));
-        if (ctx.op.getType() == MiniLangParser.ADD) {
+        if (ctx.op.getType() == comparaParser.ADD) {
             return left + right;
         } else {
             return left - right;
@@ -37,12 +37,34 @@ public class EvalVisitor extends MiniLangBaseVisitor<Integer> {
     }
 
     @Override
-    public Integer visitInt(MiniLangParser.IntContext ctx) {
+    public Integer visitCompare(comparaParser.CompareContext ctx) {
+        int left = visit(ctx.expr(0));
+        int right = visit(ctx.expr(1));
+        switch (ctx.op.getType()) {
+            case comparaParser.EQ:
+                return left == right ? 1 : 0;
+            case comparaParser.NEQ:
+                return left != right ? 1 : 0;
+            case comparaParser.LT:
+                return left < right ? 1 : 0;
+            case comparaParser.GT:
+                return left > right ? 1 : 0;
+            case comparaParser.LEQ:
+                return left <= right ? 1 : 0;
+            case comparaParser.GEQ:
+                return left >= right ? 1 : 0;
+            default:
+                return 0;
+        }
+    }
+
+    @Override
+    public Integer visitInt(comparaParser.IntContext ctx) {
         return Integer.valueOf(ctx.INT().getText());
     }
 
     @Override
-    public Integer visitId(MiniLangParser.IdContext ctx) {
+    public Integer visitId(comparaParser.IdContext ctx) {
         String id = ctx.ID().getText();
         if (memory.containsKey(id)) {
             return memory.get(id);
@@ -51,7 +73,7 @@ public class EvalVisitor extends MiniLangBaseVisitor<Integer> {
     }
 
     @Override
-    public Integer visitParens(MiniLangParser.ParensContext ctx) {
+    public Integer visitParens(comparaParser.ParensContext ctx) {
         return visit(ctx.expr());
     }
 }
